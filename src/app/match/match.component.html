@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="row">
+    <div>
+      <h1>{{match.team1}} vs. {{match.team2}}</h1>
+      <p>Date of match: {{(match.date)?match.date:"LIVE"}}</p>
+      <p *ngFor="let stream of match.streams"><a href="{{stream.link}}">{{stream.name}}</a></p>
+    </div>
+  </div>
+</div>

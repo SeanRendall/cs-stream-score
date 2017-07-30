@@ -1,0 +1,8 @@
+<div class="container">
+  <div (click)="goToMatch(match.id)" class="row" *ngFor="let match of matches">
+    <div class="card card-block">
+      <h4 class="card-title"> {{match.team1}} vs. {{match.team2}} </h4>
+      <p class="card-text">Date of match: {{(match.date)?match.date:"LIVE"}}</p>
+    </div>
+  </div>
+</div>
