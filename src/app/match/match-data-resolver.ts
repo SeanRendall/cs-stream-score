@@ -2,26 +2,18 @@ import { Injectable }             from '@angular/core';
 import { Router, Resolve, RouterStateSnapshot,
          ActivatedRouteSnapshot } from '@angular/router';
 import { HltvService } from "../hltv/hltv.service"
-import { Match } from '../models/match';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class MatchDataResolver implements Resolve<Match> {
+export class MatchDataResolver implements Resolve<any> {
 
   constructor(
     private HltvService: HltvService,
     private router: Router
   ){}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<Match> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
       let id = +route.paramMap.get('id');
-  
-      return this.HltvService.getMatch(id).then(match => {
-        if (match) {
-          return match;
-        } else { // id not found
-          this.router.navigate(['/matches']);
-          return null;
-        }
-      });
-    }
+      return this.HltvService.getMatch(id)
+  }
 }

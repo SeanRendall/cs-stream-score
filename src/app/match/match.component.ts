@@ -17,13 +17,10 @@ export class MatchComponent implements OnInit {
   constructor(private route: ActivatedRoute, private HltvService: HltvService) { }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.matchId = +params['id']; 
-      this.HltvService.getMatch(this.matchId).subscribe(match => {
-        this.match = match;
-        console.log(this.match);
+    this.route.data
+      .subscribe((data: { match: any }) => {
+        this.match = data.match
       });
-    });
   }
 
 }

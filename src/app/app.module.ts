@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { MatchesComponent } from './matches/matches.component';
 import { HltvService } from './hltv/hltv.service';
 import { MatchComponent } from './match/match.component';
+import { MatchDataResolver } from './match/match-data-resolver';
 
 const ROUTES = [
   {
@@ -20,7 +21,10 @@ const ROUTES = [
   },
   {
     path: 'match/:id',
-    component: MatchComponent
+    component: MatchComponent,
+    resolve: {
+      match: MatchDataResolver
+    }
   }
 ]
 
@@ -36,7 +40,7 @@ const ROUTES = [
     HttpModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [HltvService],
+  providers: [HltvService, MatchDataResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
