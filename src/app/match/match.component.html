@@ -2,8 +2,11 @@
   <div class="row">
     <div>
       <h1>{{match.team1}} vs. {{match.team2}}</h1>
-      <p>Date of match: {{(match.date)?match.date:"LIVE"}}</p>
-      <p *ngFor="let stream of match.streams"><a href="{{stream.link}}">{{stream.name}}</a></p>
+      <p>{{(match.date)?(match.date | date:'short'):"LIVE"}}</p>
+      <p *ngFor="let stream of match.streams">
+        <button md-raised-button *ngIf="stream.link" (click)="selectStream(stream.link)">{{(stream.name)?stream.name:stream.link}}</button>
+      </p>
+      <iframe class="stream-frame" *ngIf="currentStreamLink" [src]="currentStreamLink" allowfullscreen></iframe>
     </div>
   </div>
 </div>

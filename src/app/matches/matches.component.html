@@ -1,8 +1,15 @@
 <div class="container">
-  <div (click)="goToMatch(match.id)" class="row" *ngFor="let match of matches">
-    <div class="card card-block">
-      <h4 class="card-title"> {{match.team1}} vs. {{match.team2}} </h4>
-      <p class="card-text">Date of match: {{(match.date)?match.date:"LIVE"}}</p>
-    </div>
-  </div>
+  <md-card *ngFor="let match of matches" class="match-card" (click)="goToMatch(match.id)">
+      <img class="team-logo logo-left" src="https://static.hltv.org/images/team/logo/{{match.team1Id}}" />
+      <span class="match-title"> {{match.team1}} vs. {{match.team2}} </span>
+      <img class="team-logo logo-right" src="https://static.hltv.org/images/team/logo/{{match.team2Id}}" />
+      <p class="match-time">{{(match.date)?(match.date | date:'short'):"LIVE"}}</p>
+      <p class="match-format" [ngSwitch]="match.format">
+        <span *ngSwitchCase="'bo3'">Best Of 3</span>
+        <span *ngSwitchCase="'bo2'">Best Of 2</span>
+        <span *ngSwitchCase="'bo1'">Best Of 1</span>
+        <span *ngSwitchCase="'bo5'">Best Of 5</span>
+        <span *ngSwitchDefault>{{match.format}}</span>
+      </p>
+  </md-card>
 </div>

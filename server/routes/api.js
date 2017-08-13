@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const hltv = require('hltv');
+var cors = require('cors');
+
+router.use(cors());
 
 /* GET api listing. */
 router.get('/', (req, res) => {
@@ -8,7 +11,6 @@ router.get('/', (req, res) => {
 });
 
 router.get('/matches', (req, res) => {
-    console.log("MATCHES CALLED");
     hltv.getMatches()
         .then((matchData) => {
             res.status(200).json(matchData);
@@ -19,7 +21,6 @@ router.get('/matches', (req, res) => {
 })
 
 router.get('/match/:id', (req, res) => {
-    console.log("MATCH CALLED");
     hltv.getMatch({id: req.params.id})
         .then((matchData) => {
             res.status(200).json(matchData);

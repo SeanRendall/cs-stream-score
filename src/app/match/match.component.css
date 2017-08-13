@@ -1,0 +1,14 @@
+.stream-frame {
+  min-height: 360px;
+  min-width: 640px;
+  resize: both;
+  overflow: auto;
+}
+
+* {
+  color: white;
+}
+
+button {
+  color: black;
+}
